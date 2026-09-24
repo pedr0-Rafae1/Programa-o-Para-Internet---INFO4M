@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/../models/tarefa.php'
+require_once __DIR__ . '/../models/tarefa.php';
 
-class TarefaController{
+class tarefaController{
     private $tarefaModel;
 
     public function __construct(){
@@ -9,7 +9,7 @@ class TarefaController{
     }
 
     public function criar(){
-        if(isset($_POST['descricao']) && !empty(trims($_POST['descricao']))){
+        if(isset($_POST['descricao']) && !empty(trim($_POST['descricao']))){
             $this->tarefaModel->criar($_POST['descricao']);
         }
 
@@ -18,7 +18,7 @@ class TarefaController{
 
     public function excluir(){
 
-        if(isset[$_GET['delete']]){
+        if(isset($_GET['delete'])){
             $this->tarefaModel->excluir($_GET['delete']);
         }
 
@@ -30,6 +30,11 @@ class TarefaController{
         include __DIR__ . '/../views/listar';
     }
 
+    public function editar(){
+        if(isset($_POST['descricao']) && !empty(trim($_POST['descricao'])) && isset($_POST['id'])){
+            $this->tarefaModel->editar($_POST['descricao'], $_POST['id']);
+        }
+        header("Location: index.php");
+    }
 }
-
 ?>
